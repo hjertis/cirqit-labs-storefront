@@ -99,15 +99,15 @@ const CartDropdown = ({
         >
           <PopoverPanel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[420px] text-ui-fg-base"
+            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-slate-900 border border-slate-800 rounded-b-xl shadow-2xl w-[420px] text-slate-100 z-50"
             data-testid="nav-cart-dropdown"
           >
-            <div className="p-4 flex items-center justify-center">
-              <h3 className="text-large-semi">Cart</h3>
+            <div className="p-4 flex items-center justify-center border-b border-slate-800">
+              <h3 className="text-large-semi text-white font-mono uppercase tracking-wider">// Cart Items</h3>
             </div>
             {cartState && cartState.items?.length ? (
               <>
-                <div className="overflow-y-scroll max-h-[402px] px-4 grid grid-cols-1 gap-y-8 no-scrollbar p-px">
+                <div className="overflow-y-scroll max-h-[402px] px-4 grid grid-cols-1 gap-y-8 no-scrollbar p-px py-4">
                   {cartState.items
                     .sort((a, b) => {
                       return (a.created_at ?? "") > (b.created_at ?? "")
@@ -116,7 +116,7 @@ const CartDropdown = ({
                     })
                     .map((item) => (
                       <div
-                        className="grid grid-cols-[122px_1fr] gap-x-4"
+                        className="grid grid-cols-[122px_1fr] gap-x-4 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80"
                         key={item.id}
                         data-testid="cart-item"
                       >
@@ -128,13 +128,14 @@ const CartDropdown = ({
                             thumbnail={item.thumbnail}
                             images={item.variant?.product?.images}
                             size="square"
+                            className="bg-slate-950"
                           />
                         </LocalizedClientLink>
                         <div className="flex flex-col justify-between flex-1">
                           <div className="flex flex-col flex-1">
                             <div className="flex items-start justify-between">
                               <div className="flex flex-col overflow-ellipsis whitespace-nowrap mr-4 w-[180px]">
-                                <h3 className="text-base-regular overflow-hidden text-ellipsis">
+                                <h3 className="text-base-regular overflow-hidden text-ellipsis font-bold text-slate-100 hover:text-amber-400">
                                   <LocalizedClientLink
                                     href={`/products/${item.product_handle}`}
                                     data-testid="product-link"
@@ -148,13 +149,14 @@ const CartDropdown = ({
                                   data-value={item.variant}
                                 />
                                 <span
+                                  className="text-slate-400 text-xs font-mono mt-1"
                                   data-testid="cart-item-quantity"
                                   data-value={item.quantity}
                                 >
-                                  Quantity: {item.quantity}
+                                  QTY: {item.quantity}
                                 </span>
                               </div>
-                              <div className="flex justify-end">
+                              <div className="flex justify-end font-mono text-amber-400">
                                 <LineItemPrice
                                   item={item}
                                   style="tight"
@@ -165,7 +167,7 @@ const CartDropdown = ({
                           </div>
                           <DeleteButton
                             id={item.id}
-                            className="mt-1"
+                            className="mt-1 text-xs text-rose-400 hover:text-rose-300"
                             data-testid="cart-item-remove-button"
                           >
                             Remove
@@ -174,14 +176,14 @@ const CartDropdown = ({
                       </div>
                     ))}
                 </div>
-                <div className="p-4 flex flex-col gap-y-4 text-small-regular">
+                <div className="p-4 flex flex-col gap-y-4 text-small-regular border-t border-slate-800 bg-slate-950/50">
                   <div className="flex items-center justify-between">
-                    <span className="text-ui-fg-base font-semibold">
+                    <span className="text-slate-300 font-semibold font-mono">
                       Subtotal{" "}
-                      <span className="font-normal">(excl. taxes)</span>
+                      <span className="font-normal text-slate-500">(excl. taxes)</span>
                     </span>
                     <span
-                      className="text-large-semi"
+                      className="text-large-semi font-mono text-amber-400 font-bold"
                       data-testid="cart-subtotal"
                       data-value={subtotal}
                     >
@@ -193,7 +195,7 @@ const CartDropdown = ({
                   </div>
                   <LocalizedClientLink href="/cart" passHref>
                     <Button
-                      className="w-full"
+                      className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold border-none"
                       size="large"
                       data-testid="go-to-cart-button"
                     >
@@ -205,15 +207,20 @@ const CartDropdown = ({
             ) : (
               <div>
                 <div className="flex py-16 flex-col gap-y-4 items-center justify-center">
-                  <div className="bg-gray-900 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
+                  <div className="bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-small-regular flex items-center justify-center w-8 h-8 rounded-full">
                     <span>0</span>
                   </div>
-                  <span>Your shopping bag is empty.</span>
+                  <span className="text-slate-300 font-mono text-xs">Your shopping bag is empty.</span>
                   <div>
                     <LocalizedClientLink href="/store">
                       <>
                         <span className="sr-only">Go to all products page</span>
-                        <Button onClick={close}>Explore products</Button>
+                        <Button 
+                          onClick={close}
+                          className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold border-none"
+                        >
+                          Explore products
+                        </Button>
                       </>
                     </LocalizedClientLink>
                   </div>
