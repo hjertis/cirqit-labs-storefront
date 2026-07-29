@@ -45,8 +45,8 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
   const maxQuantity = item.variant?.manage_inventory ? 10 : maxQtyFromInventory
 
   return (
-    <Table.Row className="w-full" data-testid="product-row">
-      <Table.Cell className="!pl-0 p-4 w-24">
+    <Table.Row className="w-full border-b border-slate-800/80 hover:bg-slate-950/40 transition-colors" data-testid="product-row">
+      <Table.Cell className="pl-6 pr-4 py-5 w-24">
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
           className={clx("flex", {
@@ -62,18 +62,20 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         </LocalizedClientLink>
       </Table.Cell>
 
-      <Table.Cell className="text-left">
-        <Text
-          className="txt-medium-plus text-ui-fg-base"
-          data-testid="product-title"
-        >
-          {item.product_title}
-        </Text>
+      <Table.Cell className="text-left py-5 px-4">
+        <LocalizedClientLink href={`/products/${item.product_handle}`}>
+          <Text
+            className="text-base sm:text-lg font-extrabold text-white tracking-tight hover:text-amber-400 transition-colors block mb-0.5"
+            data-testid="product-title"
+          >
+            {item.product_title}
+          </Text>
+        </LocalizedClientLink>
         <LineItemOptions variant={item.variant} data-testid="product-variant" />
       </Table.Cell>
 
       {type === "full" && (
-        <Table.Cell>
+        <Table.Cell className="py-5 px-4">
           <div className="flex gap-2 items-center w-28">
             <DeleteButton id={item.id} data-testid="product-delete-button" />
             <CartItemSelect
@@ -105,7 +107,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       )}
 
       {type === "full" && (
-        <Table.Cell className="hidden small:table-cell">
+        <Table.Cell className="hidden small:table-cell py-5 px-4">
           <LineItemUnitPrice
             item={item}
             style="tight"
@@ -114,15 +116,15 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         </Table.Cell>
       )}
 
-      <Table.Cell className="!pr-0">
+      <Table.Cell className="pl-4 pr-6 py-5 text-right">
         <span
-          className={clx("!pr-0", {
+          className={clx("pr-0", {
             "flex flex-col items-end h-full justify-center": type === "preview",
           })}
         >
           {type === "preview" && (
-            <span className="flex gap-x-1 ">
-              <Text className="text-ui-fg-muted">{item.quantity}x </Text>
+            <span className="flex gap-x-1">
+              <Text className="text-slate-400 font-mono text-xs">{item.quantity}x </Text>
               <LineItemUnitPrice
                 item={item}
                 style="tight"

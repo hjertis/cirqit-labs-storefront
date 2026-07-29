@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Request Custom Print // LAYERLAB 3D",
+  title: "Request Custom Print // Cirqit-Labs 3D",
   description: "Submit custom 3D printing, CAD design, and rapid additive prototyping quote requests.",
 }
 

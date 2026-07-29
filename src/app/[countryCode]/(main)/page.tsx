@@ -8,7 +8,7 @@ import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
 export const metadata: Metadata = {
-  title: "LAYERLAB // Precision Additive Manufacturing & 3D Prints",
+  title: "Cirqit-Labs // Precision Additive Manufacturing & 3D Prints",
   description:
     "Engineered functional parts, modular workshop storage, and rapid custom prototyping.",
 }

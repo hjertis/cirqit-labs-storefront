@@ -1,43 +1,54 @@
 import React from "react"
 
-import { IconProps } from "types/icon"
-
-const PlaceholderImage: React.FC<IconProps> = ({
-  size = "20",
-  color = "currentColor",
-  ...attributes
-}) => {
+const PlaceholderImage: React.FC<{ size?: number | string; className?: string }> = () => {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...attributes}
-    >
-      <path
-        d="M15.3141 3.16699H4.68453C3.84588 3.16699 3.16602 3.84685 3.16602 4.6855V15.3151C3.16602 16.1537 3.84588 16.8336 4.68453 16.8336H15.3141C16.1527 16.8336 16.8326 16.1537 16.8326 15.3151V4.6855C16.8326 3.84685 16.1527 3.16699 15.3141 3.16699Z"
-        stroke={color}
-        strokeWidth="1.53749"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M7.91699 9.16699C8.60735 9.16699 9.16699 8.60735 9.16699 7.91699C9.16699 7.22664 8.60735 6.66699 7.91699 6.66699C7.22664 6.66699 6.66699 7.22664 6.66699 7.91699C6.66699 8.60735 7.22664 9.16699 7.91699 9.16699Z"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M16.6667 12.5756L13.0208 9.1665L5 16.6665"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <div className="relative w-full h-full min-h-[80px] flex flex-col items-center justify-center bg-slate-950/90 border border-slate-800/80 rounded-lg p-2 overflow-hidden select-none group-hover:border-amber-500/40 transition-colors">
+      {/* CAD Grid Pattern Overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:10px_10px] opacity-40 pointer-events-none"></div>
+      
+      {/* 3D Isometric Gridfinity Modular Bin CAD Vector */}
+      <svg
+        className="w-10 h-10 text-amber-400/90 drop-shadow-[0_0_8px_rgba(245,158,11,0.25)] z-10"
+        viewBox="0 0 64 64"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Isometric Outer Box Shell */}
+        <path
+          d="M32 8L54 20V44L32 56L10 44V20L32 8Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinejoin="round"
+        />
+        {/* Front Vertices & Top Lips */}
+        <path d="M32 56V32" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M54 20L32 32L10 20" stroke="currentColor" strokeWidth="1.8" />
+        
+        {/* Gridfinity Modular Compartments (Dashed Internal Blueprint Lines) */}
+        <path
+          d="M32 20L43 26M32 32L43 26M21 26L32 20M21 26L32 32"
+          stroke="#10b981"
+          strokeWidth="1.2"
+          strokeDasharray="2 2"
+        />
+        
+        {/* CAD Dimension Nodes */}
+        <circle cx="32" cy="8" r="1.5" fill="#f59e0b" />
+        <circle cx="54" cy="20" r="1.5" fill="#f59e0b" />
+        <circle cx="10" cy="20" r="1.5" fill="#f59e0b" />
+        <circle cx="32" cy="56" r="1.5" fill="#f59e0b" />
+      </svg>
+
+      {/* Technical Schematic Labels */}
+      <div className="z-10 mt-1 flex flex-col items-center">
+        <span className="font-mono text-[9px] font-bold text-amber-400 tracking-wider uppercase">
+          GRIDFINITY CAD
+        </span>
+        <span className="font-mono text-[8px] text-slate-500 tracking-tighter">
+          42mm &bull; 0.20mm RES
+        </span>
+      </div>
+    </div>
   )
 }
 

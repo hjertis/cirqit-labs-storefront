@@ -56,37 +56,35 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   }
 
   return (
-    <div className="w-full bg-white flex flex-col">
+    <div className="w-full bg-transparent flex flex-col text-slate-100">
       <div className="txt-medium">
-        <form action={(a) => addPromotionCode(a)} className="w-full mb-5">
+        <form action={(a) => addPromotionCode(a)} className="w-full mb-2">
           <Label className="flex gap-x-1 my-2 items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="txt-medium text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
+              className="font-mono text-xs text-amber-400 hover:text-amber-300 font-semibold tracking-wide transition-colors"
               data-testid="add-discount-button"
             >
-              Add Promotion Code(s)
+              + Add Promotion Code(s)
             </button>
-
-            {/* <Tooltip content="You can add multiple promotion codes">
-              <InformationCircleSolid color="var(--fg-muted)" />
-            </Tooltip> */}
           </Label>
 
           {isOpen && (
             <>
-              <div className="flex w-full gap-x-2">
-                <Input
-                  className="size-full"
+              <div className="flex w-full gap-x-2 mt-2">
+                <input
+                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 focus:border-amber-500 text-slate-100 font-mono text-xs focus:outline-none transition-colors"
                   id="promotion-input"
                   name="code"
                   type="text"
+                  placeholder="Enter discount code"
                   autoFocus={false}
                   data-testid="discount-input"
                 />
                 <SubmitButton
                   variant="secondary"
+                  className="bg-slate-800 hover:bg-slate-700 text-amber-400 font-mono text-xs border border-slate-700 px-4 rounded-lg"
                   data-testid="discount-apply-button"
                 >
                   Apply

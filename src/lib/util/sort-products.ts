@@ -38,7 +38,7 @@ export function sortProducts(
     })
   }
 
-  if (sortBy === "created_at") {
+  if (sortBy === "created_at" || sortBy === "-created_at" || !sortBy) {
     sortedProducts.sort((a, b) => {
       return (
         new Date(b.created_at!).getTime() - new Date(a.created_at!).getTime()

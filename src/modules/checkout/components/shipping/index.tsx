@@ -185,11 +185,11 @@ const Shipping: React.FC<ShippingProps> = ({
         <>
           <div className="grid">
             <div className="flex flex-col">
-              <span className="font-medium txt-medium text-ui-fg-base">
-                Shipping method
+              <span className="font-medium txt-medium text-white font-mono uppercase tracking-wider text-sm mb-1">
+                // Shipping method
               </span>
-              <span className="mb-4 text-ui-fg-muted txt-medium">
-                How would you like you order delivered
+              <span className="mb-4 text-slate-400 text-xs">
+                How would you like your order delivered
               </span>
             </div>
             <div data-testid="delivery-options-container">
@@ -211,9 +211,9 @@ const Shipping: React.FC<ShippingProps> = ({
                       value={PICKUP_OPTION_ON}
                       data-testid="delivery-option-radio"
                       className={clx(
-                        "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+                        "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-lg px-6 mb-2 bg-slate-950 border-slate-800 text-slate-100 hover:border-amber-500/50 transition-colors",
                         {
-                          "border-ui-border-interactive":
+                          "border-amber-500 bg-slate-950/90":
                             showPickupOptions === PICKUP_OPTION_ON,
                         }
                       )}
@@ -222,11 +222,11 @@ const Shipping: React.FC<ShippingProps> = ({
                         <MedusaRadio
                           checked={showPickupOptions === PICKUP_OPTION_ON}
                         />
-                        <span className="text-base-regular">
+                        <span className="text-base-regular text-slate-100 font-medium">
                           Pick up your order
                         </span>
                       </div>
-                      <span className="justify-self-end text-ui-fg-base">
+                      <span className="justify-self-end text-amber-400 font-mono font-bold">
                         -
                       </span>
                     </Radio>
@@ -253,11 +253,11 @@ const Shipping: React.FC<ShippingProps> = ({
                         data-testid="delivery-option-radio"
                         disabled={isDisabled}
                         className={clx(
-                          "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+                          "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-lg px-6 mb-2 bg-slate-950 border-slate-800 text-slate-100 hover:border-amber-500/50 transition-colors",
                           {
-                            "border-ui-border-interactive":
+                            "border-amber-500 bg-slate-950/90":
                               option.id === shippingMethodId,
-                            "hover:shadow-brders-none cursor-not-allowed":
+                            "opacity-50 cursor-not-allowed":
                               isDisabled,
                           }
                         )}
@@ -266,11 +266,11 @@ const Shipping: React.FC<ShippingProps> = ({
                           <MedusaRadio
                             checked={option.id === shippingMethodId}
                           />
-                          <span className="text-base-regular">
+                          <span className="text-base-regular text-slate-100 font-medium">
                             {option.name}
                           </span>
                         </div>
-                        <span className="justify-self-end text-ui-fg-base">
+                        <span className="justify-self-end text-amber-400 font-mono font-bold">
                           {option.price_type === "flat" ? (
                             convertToLocale({
                               amount: option.amount!,

@@ -22,12 +22,26 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   className,
   "data-testid": dataTestid,
 }) => {
-  const initialImage = thumbnail || images?.[0]?.url
+  let initialImage = thumbnail || images?.[0]?.url
+  if (
+    initialImage &&
+    typeof initialImage === "string" &&
+    !initialImage.startsWith("http://") &&
+    !initialImage.startsWith("https://") &&
+    !initialImage.startsWith("data:")
+  ) {
+    const backendUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || ""
+    const cleanBackendUrl = backendUrl.replace(/\/$/, "")
+    const cleanImagePath = initialImage.startsWith("/")
+      ? initialImage
+      : `/${initialImage}`
+    initialImage = `${cleanBackendUrl}${cleanImagePath}`
+  }
 
   return (
     <Container
       className={clx(
-        "relative w-full overflow-hidden p-4 bg-ui-bg-subtle shadow-elevation-card-rest rounded-large group-hover:shadow-elevation-card-hover transition-shadow ease-in-out duration-150",
+        "relative w-full overflow-hidden p-4 bg-slate-900 border border-slate-800 shadow-elevation-card-rest rounded-large group-hover:shadow-elevation-card-hover transition-shadow ease-in-out duration-150",
         className,
         {
           "aspect-[11/14]": isFeatured,

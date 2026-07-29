@@ -19,7 +19,7 @@ const Login = ({ setCurrentView }: Props) => {
     >
       <h1 className="text-xl font-bold font-mono text-white uppercase tracking-wider mb-3">// Welcome back</h1>
       <p className="text-center text-xs text-slate-400 mb-8">
-        Sign in to access your LayerLab account and saved manufacturing orders.
+        Sign in to access your Cirqit-Labs account and saved manufacturing orders.
       </p>
       <form className="w-full" action={formAction}>
         <div className="flex flex-col w-full gap-y-3">

@@ -21,10 +21,10 @@ const Register = ({ setCurrentView }: Props) => {
       data-testid="register-page"
     >
       <h1 className="text-xl font-bold font-mono text-white uppercase tracking-wider mb-3">
-        // Create LayerLab Account
+        // Create Cirqit-Labs Account
       </h1>
       <p className="text-center text-xs text-slate-400 mb-6">
-        Create your LayerLab profile to track 3D print orders, save CAD quotes, and request custom manufacturing runs.
+        Create your Cirqit-Labs profile to track 3D print orders, save CAD quotes, and request custom manufacturing runs.
       </p>
       <form className="w-full flex flex-col" action={formAction}>
         <div className="flex flex-col w-full gap-y-3">
@@ -68,19 +68,19 @@ const Register = ({ setCurrentView }: Props) => {
         </div>
         <ErrorMessage error={message} data-testid="register-error" />
         <span className="text-center text-slate-400 text-xs mt-6">
-          By creating an account, you agree to LayerLab&apos;s{" "}
+          By creating an account, you agree to Cirqit-Labs&apos;s{" "}
           <LocalizedClientLink
-            href="/content/privacy-policy"
+            href="/privacy"
             className="text-amber-400 hover:underline"
           >
             Privacy Policy
           </LocalizedClientLink>{" "}
           and{" "}
           <LocalizedClientLink
-            href="/content/terms-of-use"
+            href="/terms"
             className="text-amber-400 hover:underline"
           >
-            Terms of Use
+            Terms of Service
           </LocalizedClientLink>
           .
         </span>

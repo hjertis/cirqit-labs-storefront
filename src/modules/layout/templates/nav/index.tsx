@@ -41,7 +41,7 @@ export default async function Nav() {
               data-testid="nav-store-link"
             >
               <span className="text-amber-500 font-black">//</span>
-              <span>LAYERLAB</span>
+              <span>CIRQIT-LABS</span>
               <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/40 text-amber-400 tracking-wider">3D</span>
             </LocalizedClientLink>
           </div>

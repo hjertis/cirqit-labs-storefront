@@ -51,7 +51,7 @@ export default function WhyChooseUs() {
           // PRECISION & QUALITY ASSURANCE
         </div>
         <h2 className="text-3xl font-extrabold text-white tracking-tight">
-          Why Choose LayerLab Additive
+          Why Choose Cirqit-Labs Additive
         </h2>
         <p className="text-slate-400 text-sm mt-3">
           Industrial-grade manufacturing principles applied to every print, prototype, and modular order.

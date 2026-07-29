@@ -19,14 +19,14 @@ const Hero = () => {
         AXIS: X/Y/Z HIGH-PRECISION
       </div>
       <div className="absolute bottom-8 right-8 text-slate-700 font-mono text-xs hidden sm:block">
-        LAYERLAB ENGINE v2.4
+        CIRQIT-LABS ENGINE v2.4
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center gap-8">
         {/* Tech Badge Header */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/30 text-amber-400 font-mono text-xs tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.1)]">
           <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <span>LAYERLAB ADDITIVE MANUFACTURING PLATFORM</span>
+          <span>CIRQIT-LABS ADDITIVE MANUFACTURING PLATFORM</span>
         </div>
 
         {/* Main Headings */}

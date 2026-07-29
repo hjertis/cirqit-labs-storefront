@@ -18,7 +18,7 @@ export default async function Footer() {
               className="font-mono text-xl font-bold tracking-tight text-white hover:text-amber-400 transition-colors uppercase flex items-center gap-1.5"
             >
               <span className="text-amber-500 font-black">//</span>
-              <span>LAYERLAB</span>
+              <span>CIRQIT-LABS</span>
               <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/40 text-amber-400 tracking-wider">3D</span>
             </LocalizedClientLink>
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
@@ -102,9 +102,17 @@ export default async function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs font-mono text-slate-500">
           <div>
-            &copy; {new Date().getFullYear()} LAYERLAB 3D MANUFACTURING. ALL RIGHTS RESERVED.
+            &copy; {new Date().getFullYear()} CIRQIT-LABS 3D MANUFACTURING. ALL RIGHTS RESERVED.
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            <LocalizedClientLink href="/privacy" className="hover:text-amber-400 transition-colors text-slate-400">
+              Privacy Policy
+            </LocalizedClientLink>
+            <span>&bull;</span>
+            <LocalizedClientLink href="/terms" className="hover:text-amber-400 transition-colors text-slate-400">
+              Terms of Service
+            </LocalizedClientLink>
+            <span>&bull;</span>
             <span>RES: 0.12MM-0.28MM</span>
             <span>&bull;</span>
             <span>TOL: &plusmn;0.1MM</span>
