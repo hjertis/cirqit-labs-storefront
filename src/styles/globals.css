@@ -97,8 +97,33 @@
     @apply text-[32px] leading-[44px] font-normal;
   }
 
-  .text-3xl-semi {
-    @apply text-[32px] leading-[44px] font-semibold;
+  .glass-panel {
+    @apply bg-slate-900/75 backdrop-blur-md border border-slate-800/90 shadow-xl;
+  }
+
+  .glass-panel-amber {
+    @apply bg-slate-900/80 backdrop-blur-md border border-amber-500/30 shadow-[0_0_25px_rgba(245,158,11,0.08)];
+  }
+
+  .glass-panel-cyan {
+    @apply bg-slate-900/80 backdrop-blur-md border border-cyan-500/30 shadow-[0_0_25px_rgba(6,182,212,0.08)];
+  }
+
+  .tech-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-mono text-[11px] uppercase tracking-wider font-semibold border;
+  }
+
+  .tech-badge-amber {
+    @apply tech-badge bg-amber-500/10 text-amber-400 border-amber-500/30;
+  }
+
+  .tech-badge-cyan {
+    @apply tech-badge bg-cyan-500/10 text-cyan-400 border-cyan-500/30;
+  }
+
+  .tech-badge-emerald {
+    @apply tech-badge bg-emerald-500/10 text-emerald-400 border-emerald-500/30;
   }
 }
+
 
