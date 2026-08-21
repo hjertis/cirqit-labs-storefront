@@ -23,66 +23,84 @@ export const listProducts = async ({
   queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductListParams
 }> => {
   if (!countryCode && !regionId) {
-    throw new Error("Country code or region ID is required")
+    return {
+      response: { products: [], count: 0 },
+      nextPage: null,
+      queryParams,
+    }
   }
 
   const limit = queryParams?.limit || 12
   const _pageParam = Math.max(pageParam, 1)
   const offset = _pageParam === 1 ? 0 : (_pageParam - 1) * limit
 
-  let region: HttpTypes.StoreRegion | undefined | null
+  try {
+    let region: HttpTypes.StoreRegion | undefined | null
 
-  if (countryCode) {
-    region = await getRegion(countryCode)
-  } else {
-    region = await retrieveRegion(regionId!)
-  }
+    if (countryCode) {
+      region = await getRegion(countryCode)
+    } else {
+      region = await retrieveRegion(regionId!)
+    }
 
-  if (!region) {
+    if (!region) {
+      return {
+        response: { products: [], count: 0 },
+        nextPage: null,
+        queryParams,
+      }
+    }
+
+    const headers = {
+      ...(await getAuthHeaders()),
+    }
+
+    const next = {
+      ...(await getCacheOptions("products")),
+    }
+
+    return await sdk.client
+      .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
+        `/store/products`,
+        {
+          method: "GET",
+          query: {
+            limit,
+            offset,
+            region_id: region?.id,
+            fields:
+              "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+metadata,+tags,",
+            ...queryParams,
+          },
+          headers,
+          next,
+          cache: "force-cache",
+        }
+      )
+      .then(({ products, count }) => {
+        const nextPage = count > offset + limit ? pageParam + 1 : null
+
+        return {
+          response: {
+            products: products || [],
+            count: count || 0,
+          },
+          nextPage: nextPage,
+          queryParams,
+        }
+      })
+  } catch (error) {
+    console.warn(
+      `Failed to list products: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    )
     return {
       response: { products: [], count: 0 },
       nextPage: null,
+      queryParams,
     }
   }
-
-  const headers = {
-    ...(await getAuthHeaders()),
-  }
-
-  const next = {
-    ...(await getCacheOptions("products")),
-  }
-
-  return sdk.client
-    .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
-      `/store/products`,
-      {
-        method: "GET",
-        query: {
-          limit,
-          offset,
-          region_id: region?.id,
-          fields:
-            "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+metadata,+tags,",
-          ...queryParams,
-        },
-        headers,
-        next,
-        cache: "force-cache",
-      }
-    )
-    .then(({ products, count }) => {
-      const nextPage = count > offset + limit ? pageParam + 1 : null
-
-      return {
-        response: {
-          products,
-          count,
-        },
-        nextPage: nextPage,
-        queryParams,
-      }
-    })
 }
 
 /**
@@ -106,31 +124,44 @@ export const listProductsWithSort = async ({
 }> => {
   const limit = queryParams?.limit || 12
 
-  const {
-    response: { products, count },
-  } = await listProducts({
-    pageParam: 0,
-    queryParams: {
-      ...queryParams,
-      limit: 100,
-    },
-    countryCode,
-  })
+  try {
+    const {
+      response: { products, count },
+    } = await listProducts({
+      pageParam: 0,
+      queryParams: {
+        ...queryParams,
+        limit: 100,
+      },
+      countryCode,
+    })
 
-  const sortedProducts = sortProducts(products, sortBy)
+    const sortedProducts = sortProducts(products, sortBy)
 
-  const pageParam = (page - 1) * limit
+    const pageParam = (page - 1) * limit
 
-  const nextPage = count > pageParam + limit ? pageParam + limit : null
+    const nextPage = count > pageParam + limit ? pageParam + limit : null
 
-  const paginatedProducts = sortedProducts.slice(pageParam, pageParam + limit)
+    const paginatedProducts = sortedProducts.slice(pageParam, pageParam + limit)
 
-  return {
-    response: {
-      products: paginatedProducts,
-      count,
-    },
-    nextPage,
-    queryParams,
+    return {
+      response: {
+        products: paginatedProducts,
+        count,
+      },
+      nextPage,
+      queryParams,
+    }
+  } catch (error) {
+    console.warn(
+      `Failed to list products with sort: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    )
+    return {
+      response: { products: [], count: 0 },
+      nextPage: null,
+      queryParams,
+    }
   }
 }

@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import { Metadata } from "next"
 
 import Hero from "@modules/home/components/hero"
@@ -28,7 +30,7 @@ export default async function Home(props: {
     fields: "id, handle, title",
   })
 
-  if (!collections || !region) {
+  if (!region) {
     return null
   }
 
@@ -50,11 +52,13 @@ export default async function Home(props: {
       <WhyChooseUs />
 
       {/* 6. Featured Products Catalog Strip */}
-      <div className="py-16 bg-slate-950/80 border-t border-slate-800/60">
-        <ul className="flex flex-col gap-x-6">
-          <FeaturedProducts collections={collections} region={region} />
-        </ul>
-      </div>
+      {collections && collections.length > 0 && (
+        <div className="py-16 bg-slate-950/80 border-t border-slate-800/60">
+          <ul className="flex flex-col gap-x-6">
+            <FeaturedProducts collections={collections} region={region} />
+          </ul>
+        </div>
+      )}
     </div>
   )
 }

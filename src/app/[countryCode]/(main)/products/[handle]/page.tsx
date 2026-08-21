@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { listProducts } from "@lib/data/products"
@@ -16,7 +18,7 @@ export async function generateStaticParams() {
       regions?.map((r) => r.countries?.map((c) => c.iso_2)).flat()
     )
 
-    if (!countryCodes) {
+    if (!countryCodes || countryCodes.length === 0) {
       return []
     }
 
@@ -43,10 +45,10 @@ export async function generateStaticParams() {
       )
       .filter((param) => param.handle)
   } catch (error) {
-    console.error(
+    console.warn(
       `Failed to generate static paths for product pages: ${
         error instanceof Error ? error.message : "Unknown error"
-      }.`
+      }`
     )
     return []
   }
@@ -71,7 +73,6 @@ function getImagesForVariant(
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  const { handle } = params
   const region = await getRegion(params.countryCode)
 
   if (!region) {
@@ -80,7 +81,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const product = await listProducts({
     countryCode: params.countryCode,
-    queryParams: { handle },
+    queryParams: { handle: params.handle },
   }).then(({ response }) => response.products[0])
 
   if (!product) {
@@ -88,10 +89,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${product.title} | Medusa Store`,
+    title: `${product.title} | Cirqit-Labs`,
     description: `${product.title}`,
     openGraph: {
-      title: `${product.title} | Medusa Store`,
+      title: `${product.title} | Cirqit-Labs`,
       description: `${product.title}`,
       images: product.thumbnail ? [product.thumbnail] : [],
     },
@@ -114,11 +115,11 @@ export default async function ProductPage(props: Props) {
     queryParams: { handle: params.handle },
   }).then(({ response }) => response.products[0])
 
-  const images = getImagesForVariant(pricedProduct, selectedVariantId)
-
   if (!pricedProduct) {
     notFound()
   }
+
+  const images = getImagesForVariant(pricedProduct, selectedVariantId)
 
   return (
     <ProductTemplate
